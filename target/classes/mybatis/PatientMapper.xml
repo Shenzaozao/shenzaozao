@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rabbiter.hospital.mapper.PatientMapper">
+    <select id="patientAge" resultType="Integer">
+        select count(p_id) as agePeople from patient  where
+            p_age BETWEEN #{startAge} AND #{endAge}
+    </select>
+    <select id="selectPrice" resultType="java.lang.Integer">
+        SELECT d_price FROM doctor WHERE d_id = #{dId}
+    </select>
+    <update id="updateIntegral">
+        UPDATE patient SET p_integral = #{pIntegral} WHERE p_id = #{pId}
+    </update>
+    <update id="updatePatient">
+        UPDATE patient SET p_balance = #{pBalance} , p_isvip = 1, p_integral = #{pIntegral} WHERE p_id = #{pId}
+    </update>
+
+</mapper>

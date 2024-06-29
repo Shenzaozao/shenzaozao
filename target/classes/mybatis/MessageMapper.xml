@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rabbiter.hospital.mapper.MessageMapper">
+    <select id="findUnreadMessagesByUsername" parameterType="int" resultType="com.rabbiter.hospital.pojo.Message">
+        SELECT * FROM message WHERE sender_id = #{userId} AND is_read = false
+    </select>
+    <insert id="saveMessage">
+        INSERT INTO message (message_content, receiver_id, sender_id, read, online)
+        VALUES (#{messageContent}, #{receiverId}, #{senderId}, #{read}, #{online})
+    </insert>
+    <update id="updateMessagesStatus">
+        UPDATE message SET is_read = true WHERE message_id = #{messageId}
+    </update>
+</mapper>
